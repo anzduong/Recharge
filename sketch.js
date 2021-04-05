@@ -42,6 +42,9 @@ function preload() {
 
   buttonOn = loadImage('assets/buttonOn.png');
   buttonOff = loadImage('assets/buttonOff.png');
+
+  assemblyLine = loadImage('assets/assemblyLine.png');
+  aniBottles = loadAnimation('assets/bottles3.png','assets/bottles2.png', 'assets/bottles1.png')
 }
 
 // Center drawing, drawFunction will be one for default
@@ -156,7 +159,8 @@ function click2() {
 //-- drawRechargeEnergy() will draw the image at index 2 from the array
 drawThree = function() {
   fill(0);
-  rect(200,200,width/2,height/2);
+  image(assemblyLine, width/2, height/2 - 50);
+  animation(aniBottles, width/2 + 20, height/2 + 150);
 }
 
 
