@@ -55,7 +55,7 @@ function setup() {
   textFont('Futura');
 
   // set to one for startup
-  drawFunction = drawSplash;
+  drawFunction = intro;
 
 }
 
@@ -69,8 +69,8 @@ function draw() {
 
 //========= TEMPLATE: modify these functions, INSIDE the function blocks only =========
 
-//-- drawOne() will draw the image at index 0 from the array
-drawOne = function() {
+//-- rechargeEnergy() will draw the image at index 0 from the array
+rechargeEnergy = function() {
   frameRate(5);
   image(floor, width/2, height/2 - 50);
 
@@ -106,8 +106,8 @@ function click() {
   }
 }
 
-//-- drawTwo() will draw the image at index 1 from the array
-drawTwo = function() {
+//-- snackMachine() will draw the image at index 1 from the array
+snackMachine = function() {
   image(plant, width/2, height/2 - 50);
   image(snackMachine,width/2, height/2);
   animation(aniSnackButton, width/2 + 182, height/2 - 45);
@@ -153,7 +153,7 @@ function click2() {
     animation(aniBar2, width/2 + 400, height/2 - 85);
   }
 }
-//-- drawOne() will draw the image at index 2 from the array
+//-- rechargeEnergy() will draw the image at index 2 from the array
 drawThree = function() {
    image(images[2],width/2, height/2);
 
@@ -162,35 +162,35 @@ drawThree = function() {
 }
 
 
-//-- drawSplash() will draw the image at index 4 from the array
-drawSplash = function() {
+//-- intro() will draw the image at index 4 from the array
+intro = function() {
    image(images[5],width/2, height/2);
 }
 
 
 // Change the drawFunction variable based on your interaction
 function keyTyped() {
-  if( drawFunction === drawSplash ) {
+  if( drawFunction === intro ) {
     return;
   }
 
   if( key === '1' ) {
-  	drawFunction = drawOne;
+  	drawFunction = rechargeEnergy;
   }
   else if( key === '2' ) {
-  	drawFunction = drawTwo;
+  	drawFunction = snackMachine;
   }
   else if( key === '3' ) {
   	drawFunction = drawThree;
   }
   else if( key === 's' ) {
-    drawFunction = drawSplash;
+    drawFunction = intro;
   }
 }
 
 function mousePressed() {
   // only change state if we are in splash screen
-  if( drawFunction === drawSplash ) {
-    drawFunction = drawOne;
+  if( drawFunction === intro ) {
+    drawFunction = rechargeEnergy;
   }
 }
