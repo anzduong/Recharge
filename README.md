@@ -10,7 +10,7 @@ This is interaction design that follows the theme of "Production and Consumption
 
 drawFunction is a VARIABLE that points to a function varible name
 
-recharge(), snackMachine(), etc. are set to be functions.
+drawRechargeEnergy(), drawSnackMachine(), etc. are set to be functions.
 
 the the keys 1-3 and 's' key will change the drawFunction variable
 
