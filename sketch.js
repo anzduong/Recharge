@@ -17,8 +17,6 @@ var hoverSpeed = 2;
 var gTextOffset = 40;
 var gTextOffset2 = 550;
 
-var circleY = 0;
-
 // string for variable intro message
 var intro = ["Hi, Welcome!", " Hope You're In A Good Mood!", "If Not...", 
 "I Know What You Need", "Click Anywhere To Begin"];
@@ -77,7 +75,8 @@ function setup() {
   // set to one for startup
   drawFunction = drawIntro;
 
-    a = height/2 + 200;
+  // define height for line moving
+  a = height/2 + 200;
 
 }
 
@@ -230,7 +229,6 @@ function healthBar() {
   text('Endorphins Levels: ', width/2 + 400 + gHover, height/2 - 200);
 
 }
-
 
 // create clickale button for page 2
 function click2() {
