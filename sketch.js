@@ -17,6 +17,34 @@ var hoverSpeed = 2;
 var gTextOffset = 40;
 var gTextOffset2 = 550;
 
+//creates array to store links of creature
+var creature = [];
+
+var y;
+var x;
+var xoff = 0.0
+var yoff = 0.0
+var count = 0
+
+//creates variables for the starting position of the creature
+//var positions = [(50, 50), (100, 100), (200,)]
+var positionX = 10;
+var positionY = 170;
+
+//creates a variable for the size and length of the creature
+var linkDiameter = 70;
+var numLinks = 20;
+
+var speed = 0.1;
+
+var targetX = 200
+var targetY = 200
+
+function setup() {
+  createCanvas(850, 300);
+  strokeWeight(0);
+
+
 // string for variable intro message
 var intro = ["Hi, Welcome!", " Hope You're In A Good Mood!", "If Not...", 
 "I Know What You Need", "Click Anywhere To Begin"];
@@ -123,7 +151,7 @@ drawHover = function() {
 drawRechargeEnergy = function() {
   frameRate(5);
   image(floor, width/2, height/2 - 50);
-
+  
   fill('#008DB0');
   textSize(40);
   text("Energy Recharge Stations", width/2, height/8 + gHover);
