@@ -13,18 +13,16 @@ var lineHeight1 = 80;
 var gHover = 0;
 var hoverSpeed = 2;
 
-// string for variable intro text
+// offset from bottom of screen
+var gTextOffset = 40;
+var gTextOffset2 = 550;
+
+// string for variable intro message
 var intro = ["Hi, Welcome!", " Hope You're In A Good Mood!", "If Not...", 
 "I Know What You Need", "Click Anywhere To Begin"];
 
 // load all images into an array
 function preload() {
-  images[0] = loadImage('assets/one.png');
-  images[1] = loadImage('assets/two.png');
-  images[2] = loadImage('assets/three.png');
-  images[3] = loadImage('assets/four.png');
-  images[4] = loadImage('assets/five.png');
-  images[5] = loadImage('assets/splash.png');
 
   // specify width and height of each frame and number of frames
   aniBar = loadAnimation('assets/barEmpty.png', 'assets/bar25.png','assets/bar50.png', 'assets/bar75.png','assets/bar100.png');
@@ -87,21 +85,54 @@ function draw() {
 
 }
 
-//========= TEMPLATE: modify these functions, INSIDE the function blocks only =========
+//-- drawIntro() will displays instructions 
+drawIntro = function() {
+  frameRate(2);
 
-//-- drawRechargeEnergy() will draw the image at index 0 from the array
+  col1 = random(147);
+  col2 = random(172);
+  col3 = random(210);
+
+  // randomizes background color
+  background(col1, col2, col3);
+
+  // position text
+  midX = width/2;
+  startY = height/4;
+
+  fill('#ffffff');
+  textSize(55);
+
+  // parse though string array to print title string
+  for ( let i = 0; i < intro.length; i++ ) {
+    text(intro[i], midX, startY + (i * lineHeight1) + gHover);
+  }
+  return;
+}
+
+// creates hover effect
+drawHover = function() {
+  gHover = gHover + hoverSpeed;
+
+  if ( gHover > 10 || gHover < -10 ) {
+    hoverSpeed = hoverSpeed * -1;
+  }
+}
+
+//-- drawRechargeEnergy() us the first sketch
 drawRechargeEnergy = function() {
   frameRate(5);
   image(floor, width/2, height/2 - 50);
 
   fill('#008DB0');
   textSize(40);
-  text("Energy Recharge Stations", width/2, height/8);
+  text("Energy Recharge Stations", width/2, height/8 + gHover);
   image(barEmpty2, width/2, height/2 - 150);
   image(buttonOff, width/8 - 50, height/2 + 80);
 
   textSize(24);
-  text('Click to charge!', width/8 - 50, height/2 + 40)
+  text('Click to Charge!', width/8 - 50 + gHover, height/2 + 40)
+
 
   if (mouseIsPressed) {
     image(tubes, width/2, height/2 + 100);
@@ -112,6 +143,10 @@ drawRechargeEnergy = function() {
     image(tubes, width/2, height/2 + 100);
     image(imgOutside, width/2 + 50, height/2 + 155);
   }
+
+  textSize(30);
+  fill(0);
+  text('Press #1-3 to Change Pages', width/2 + gHover, height - gTextOffset2);
 }
 
 function click() {
@@ -126,7 +161,7 @@ function click() {
   }
 }
 
-//-- drawSnackMachine() will draw the image at index 1 from the array
+//-- drawSnackMachine is the second sketch
 drawSnackMachine = function() {
   image(plant, width/2, height/2 - 50);
   image(snackMachine,width/2, height/2);
@@ -139,7 +174,7 @@ drawSnackMachine = function() {
 
   fill('#008DB0');
   textSize(40);
-  text("Happy Chemical Snack Machine", width/2, height/8);
+  text("Happy Chemical Snack Machine", width/2, height/8 + gHover);
 
 
   if(mouseIsPressed) {
@@ -153,18 +188,24 @@ drawSnackMachine = function() {
     image(snackFull,width/2 - 25, height/2 - 55);
   }
 
+  textSize(30);
+  fill(0);
+  text('Press #1-3 to Change Pages', width/2 + gHover, height - gTextOffset);
+
 }
 
+// prints levels status
 function healthBar() {
   fill(0);
   textSize(24);
-  text('Dopamine Levels: ', width/2 + 400, height/2 + 55);
-  text('Serotonin Levels: ', width/2 + 400, height/2 - 115);
-  text('Endorphins Levels: ', width/2 + 400, height/2 - 30);
-  text('Endorphins Levels: ', width/2 + 400, height/2 - 200);
+  text('Dopamine Levels: ', width/2 + 400 + gHover, height/2 + 55);
+  text('Serotonin Levels: ', width/2 + 400 + gHover, height/2 - 115);
+  text('Endorphins Levels: ', width/2 + 400 + gHover, height/2 - 30);
+  text('Endorphins Levels: ', width/2 + 400 + gHover, height/2 - 200);
 
 }
 
+// create clickale button for page 2
 function click2() {
   let button2 = dist(mouseX, mouseY, width/2 + 182, height/2 - 45);
   if (button2 <= 50) {
@@ -174,71 +215,44 @@ function click2() {
   }
 }
 
-//-- drawFactory() will draw the image at index 2 from the array
+
+//-- drawFactory is the last sketch
 drawFactory = function() {
   fill('#008DB0');
   textSize(40);
-  text("Happy Chemical Factory", width/2, height/8);
+  text("Happy Chemical Factory", width/2, height/8 + gHover);
   image(assemblyLine, width/2, height/2 - 50);
-  image(buttonOff, width/2 + 400, height/5 + 80);
+  image(buttonOff, width/2 + 400, height/2 - gTextOffset - 40);
 
   textSize(24);
   fill(0);
-  text('Click to start the assembly line!', width/2 + 400, height/5 + 40)
+  text('Click to Start the Assembly Line!', width/2 + 400 + gHover, height/4 + 40)
 
   if (mouseIsPressed) {
     click3();
-    image(buttonOn, width/2 + 400, height/5 + 80);
+    image(buttonOn, width/2 + 400, height/2 - gTextOffset - 40);
   }
+
+  textSize(30);
+  fill(0);
+  text('Press #1-3 to Change Pages', width/2 + gHover, height - gTextOffset2);
 }
 
+// create clickable button for page 3
 function click3() {
-  let button = dist(mouseX, mouseY, width/2 + 400, height/5 + 40);
+  let button = dist(mouseX, mouseY, width/2 + 400, height/2 - gTextOffset - 40);
   if (button <= 50) {
     imageMode(CENTER);
     animation(aniBottles, width/2 + 20, height/2 + 150);
   }
 }
 
-//-- drawIntro() will displays instructions 
-drawIntro = function() {
-  frameRate(2);
-
-  col1 = random(147);
-  col2 = random(172);
-  col3 = random(210);
-
-  background(col1, col2, col3);
-
-  // position text
-  midX = width/2;
-  startY = height/4;
-
-  // fill green color
-  fill('#ffffff');
-  textSize(55);
-
-  // parse though string array
-  for ( let i = 0; i < intro.length; i++ ) {
-    text(intro[i], midX, startY + (i * lineHeight1) + gHover);
-  }
-  return;
-}
-
-drawHover = function() {
-  gHover = gHover + hoverSpeed;
-
-  if ( gHover > 10 || gHover < -10 ) {
-    hoverSpeed = hoverSpeed * -1;
-  }
-}
 
 // Change the drawFunction variable based on your interaction
 function keyTyped() {
   if( drawFunction === drawIntro ) {
     return;
   }
-
   if( key === '1' ) {
   	drawFunction = drawRechargeEnergy;
   }
