@@ -58,7 +58,7 @@ function setup() {
   textFont('Futura');
 
   // set to one for startup
-  drawFunction = drawSplash;
+  drawFunction = drawIntro;
 
 }
 
@@ -156,23 +156,40 @@ function click2() {
     animation(aniBar2, width/2 + 400, height/2 - 85);
   }
 }
-//-- drawRechargeEnergy() will draw the image at index 2 from the array
-drawThree = function() {
-  fill(0);
+//-- drawFactory() will draw the image at index 2 from the array
+drawFactory = function() {
+  fill('#008DB0');
+  textSize(40);
+  text("Happy Chemical Factory", width/2, height/8);
   image(assemblyLine, width/2, height/2 - 50);
-  animation(aniBottles, width/2 + 20, height/2 + 150);
+  image(buttonOff, width/2 + 400, height/5 + 80);
+
+  textSize(24);
+  text('Click to start the assembly line!', width/2 + 400, height/5 + 40)
+
+  if (mouseIsPressed) {
+    click3();
+    image(buttonOn, width/2 + 400, height/5 + 80);
+  }
 }
 
+function click3() {
+  let button = dist(mouseX, mouseY, width/2 + 400, height/5 + 40);
+  if (button <= 50) {
+    imageMode(CENTER);
+    animation(aniBottles, width/2 + 20, height/2 + 150);
+  }
+}
 
-//-- drawSplash() will draw the image at index 4 from the array
-drawSplash = function() {
+//-- drawIntro() will draw the image at index 4 from the array
+drawIntro = function() {
    image(images[5],width/2, height/2);
 }
 
 
 // Change the drawFunction variable based on your interaction
 function keyTyped() {
-  if( drawFunction === drawSplash ) {
+  if( drawFunction === drawIntro ) {
     return;
   }
 
@@ -183,16 +200,16 @@ function keyTyped() {
   	drawFunction = drawSnackMachine;
   }
   else if( key === '3' ) {
-  	drawFunction = drawThree;
+  	drawFunction = drawFactory;
   }
-  else if( key === 's' ) {
-    drawFunction = drawSplash;
+  else if( key === 'i' ) {
+    drawFunction = drawIntro;
   }
 }
 
 function mousePressed() {
   // only change state if we are in splash screen
-  if( drawFunction === drawSplash ) {
+  if( drawFunction === drawIntro ) {
     drawFunction = drawRechargeEnergy;
   }
 }
