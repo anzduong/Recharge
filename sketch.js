@@ -4,6 +4,19 @@ var images = [];
 // variable that is a function 
 var drawFunction;
 
+// global variables for drawIntro()
+var midX;
+var startY;
+var lineHeight1 = 80;
+
+// create hover
+var gHover = 0;
+var hoverSpeed = 2;
+
+// string for variable intro text
+var intro = ["Hi, Welcome!", " Hope You're In A Good Mood!", "If Not...", 
+"I Know What You Need", "Click Anywhere To Begin"];
+
 // load all images into an array
 function preload() {
   images[0] = loadImage('assets/one.png');
@@ -55,7 +68,7 @@ function setup() {
   imageMode(CENTER);
   textAlign(CENTER);
   textSize(24);
-  textFont('Futura');
+  textFont('Spicy Rice');
 
   // set to one for startup
   drawFunction = drawIntro;
@@ -68,6 +81,10 @@ function draw() {
 
   // will call your state machine function
   drawFunction();
+
+  // draw hover effect
+  drawHover();
+
 }
 
 //========= TEMPLATE: modify these functions, INSIDE the function blocks only =========
@@ -156,6 +173,7 @@ function click2() {
     animation(aniBar2, width/2 + 400, height/2 - 85);
   }
 }
+
 //-- drawFactory() will draw the image at index 2 from the array
 drawFactory = function() {
   fill('#008DB0');
@@ -165,6 +183,7 @@ drawFactory = function() {
   image(buttonOff, width/2 + 400, height/5 + 80);
 
   textSize(24);
+  fill(0);
   text('Click to start the assembly line!', width/2 + 400, height/5 + 40)
 
   if (mouseIsPressed) {
@@ -181,11 +200,38 @@ function click3() {
   }
 }
 
-//-- drawIntro() will draw the image at index 4 from the array
+//-- drawIntro() will displays instructions 
 drawIntro = function() {
-   image(images[5],width/2, height/2);
+  frameRate(2);
+
+  col1 = random(147);
+  col2 = random(172);
+  col3 = random(210);
+
+  background(col1, col2, col3);
+
+  // position text
+  midX = width/2;
+  startY = height/4;
+
+  // fill green color
+  fill('#ffffff');
+  textSize(55);
+
+  // parse though string array
+  for ( let i = 0; i < intro.length; i++ ) {
+    text(intro[i], midX, startY + (i * lineHeight1) + gHover);
+  }
+  return;
 }
 
+drawHover = function() {
+  gHover = gHover + hoverSpeed;
+
+  if ( gHover > 10 || gHover < -10 ) {
+    hoverSpeed = hoverSpeed * -1;
+  }
+}
 
 // Change the drawFunction variable based on your interaction
 function keyTyped() {
