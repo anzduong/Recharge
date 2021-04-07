@@ -17,6 +17,8 @@ var hoverSpeed = 2;
 var gTextOffset = 40;
 var gTextOffset2 = 550;
 
+var circleY = 0;
+
 // string for variable intro message
 var intro = ["Hi, Welcome!", " Hope You're In A Good Mood!", "If Not...", 
 "I Know What You Need", "Click Anywhere To Begin"];
@@ -55,7 +57,11 @@ function preload() {
   buttonOff = loadImage('assets/buttonOff.png');
 
   assemblyLine = loadImage('assets/assemblyLine.png');
-  aniBottles = loadAnimation('assets/bottles3.png','assets/bottles2.png', 'assets/bottles1.png')
+  aniBottles = loadAnimation('assets/bottles3.png','assets/bottles2.png', 'assets/bottles1.png');
+
+  machineSound = loadSound('assets/machineSound.mp3');
+  glitchSound = loadSound('assets/glitchSound.mp3');
+  conveyorSound = loadSound('assets/conveyorSound.mp3');
 }
 
 // Center drawing, drawFunction will be one for default
@@ -176,6 +182,7 @@ function click() {
     image(buttonOn, width/8 - 50, height/2 + 80);
     image(imgInside, width/2, height/2 + 50);
     image(door, width/2, height/2 + 120);
+    glitchSound.play();
 
   }
 }
@@ -224,6 +231,7 @@ function healthBar() {
 
 }
 
+
 // create clickale button for page 2
 function click2() {
   let button2 = dist(mouseX, mouseY, width/2 + 182, height/2 - 45);
@@ -231,6 +239,12 @@ function click2() {
     imageMode(CENTER);
     image(snackMissing,width/2 - 25, height/2 - 55);
     animation(aniBar2, width/2 + 400, height/2 - 85);
+
+    machineSound.play();
+  }
+
+  else{
+    machineSound.stop();
   }
 }
 
@@ -263,6 +277,10 @@ function click3() {
   if (button <= 50) {
     imageMode(CENTER);
     animation(aniBottles, width/2 + 20, height/2 + 150);
+    conveyorSound.play();
+  }
+  else{
+    conveyorSound.stop();
   }
 }
 
