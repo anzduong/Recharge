@@ -57,7 +57,7 @@ function preload() {
   assemblyLine = loadImage('assets/assemblyLine.png');
   aniBottles = loadAnimation('assets/bottles3.png','assets/bottles2.png', 'assets/bottles1.png');
 
-  machineSound = loadSound('assets/machineSound.mp3');
+  machineSound = loadSound('assets/machineSound.wav');
   glitchSound = loadSound('assets/glitchSound.mp3');
   conveyorSound = loadSound('assets/conveyorSound.mp3');
 }
@@ -103,6 +103,8 @@ function drawLine() {
   }
 }
 
+/******************** INTRO PAGE ********************/
+
 //-- drawIntro() will displays instructions 
 drawIntro = function() {
 
@@ -137,6 +139,8 @@ drawHover = function() {
     hoverSpeed = hoverSpeed * -1;
   }
 }
+
+/******************** PAGE 1 ********************/
 
 //-- drawRechargeEnergy() us the first sketch
 drawRechargeEnergy = function() {
@@ -185,6 +189,8 @@ function click() {
 
   }
 }
+
+/******************** PAGE 2 ********************/
 
 //-- drawSnackMachine is the second sketch
 drawSnackMachine = function() {
@@ -246,6 +252,7 @@ function click2() {
   }
 }
 
+/******************** PAGE 3 ********************/
 
 //-- drawFactory is the last sketch
 drawFactory = function() {
@@ -282,6 +289,7 @@ function click3() {
   }
 }
 
+/******************** KEY/MOUSE FUNCTIONS ********************/
 
 // Change the drawFunction variable based on your interaction
 function keyTyped() {
